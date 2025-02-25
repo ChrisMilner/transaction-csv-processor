@@ -10,9 +10,7 @@ class Processor:
 
     def process_csv(self, filename):
         with open(filename) as file:
-            processed = self._process_transactions(csv.DictReader(file))
-
-        return "\n".join(["\t".join(p) for p in processed])
+            return self._process_transactions(csv.DictReader(file))
 
     def _process_transactions(self, transaction_reader):
         multiplier = (-1 if self.config.flip_values else 1)
