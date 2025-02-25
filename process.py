@@ -1,30 +1,9 @@
-import csv
-
-from decimal import Decimal
 from argparse import ArgumentParser
 
 from src.clipboard import copy_to_clipboard
 from src.config import FileConfig
+from src.processor import Processor
 
-
-def process_transactions(transaction_reader, config):
-    multiplier = (-1 if config.flip_values else 1)
-
-    formatted = [
-        [t[config.date_col], t[config.desc_col], str(multiplier * Decimal(t[config.value_col]))]
-        for t in transaction_reader
-        if t[config.value_col]
-    ]
-
-    return formatted
-
-def process_csv(in_file, type):
-    config = FileConfig.from_type(type)
-
-    with open(in_file) as in_csv:
-        processed = process_transactions(csv.DictReader(in_csv), config)
-
-        return "\n".join(["\t".join(p) for p in processed])
 
 def parse_args():
     parser = ArgumentParser(prog='Transation CSV Processor')
@@ -37,7 +16,8 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
 
-    processed = process_csv(args.in_file, args.type)
+    processor = Processor(args.type) 
+    result = processor.process_csv(args.in_file)
 
-    copy_to_clipboard(processed)
+    copy_to_clipboard(result)
     print('Result copied to clipboard')
