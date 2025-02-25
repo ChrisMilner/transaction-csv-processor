@@ -3,8 +3,8 @@ import csv
 from decimal import Decimal
 from argparse import ArgumentParser
 
-from clipboard import copy_to_clipboard
-from config import FileConfig
+from src.clipboard import copy_to_clipboard
+from src.config import FileConfig
 
 
 def process_transactions(transaction_reader, config):

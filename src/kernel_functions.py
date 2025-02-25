@@ -1,4 +1,4 @@
-from ctypes import windll, sizeof, c_wchar, c_wchar_p, memmove, CDLL, get_errno, wintypes, c_size_t
+from ctypes import windll, CDLL, wintypes, c_size_t
 
 
 class KernelFunctions():

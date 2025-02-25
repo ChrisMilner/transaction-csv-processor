@@ -1,6 +1,7 @@
 from ctypes import sizeof, c_wchar, c_wchar_p, memmove
 
-from kernel_functions import KernelFunctions
+from src.kernel_functions import KernelFunctions
+
 
 def copy_to_clipboard(text):
     KernelFunctions.openClipboard(None)
