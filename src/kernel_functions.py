@@ -1,4 +1,4 @@
-from ctypes import windll, CDLL, wintypes, c_size_t
+from ctypes import windll, CDLL, wintypes, c_size_t, memmove
 
 
 class KernelFunctions():
@@ -6,8 +6,10 @@ class KernelFunctions():
     CF_UNICODETEXT = 13
 
     wcslen = CDLL('msvcrt').wcslen
+    memmove = memmove
 
     openClipboard = windll.user32.OpenClipboard
+    
     closeClipboard = windll.user32.CloseClipboard
 
     setClipboardData = windll.user32.SetClipboardData
