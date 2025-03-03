@@ -6,9 +6,12 @@ from src.config import FileConfig
 
 class Processor:
     def __init__(self, type):
-        self.config = FileConfig.from_type(type)
+        self.config = FileConfig.from_type(type) if type != 'DETECT' else None
 
     def process_csv(self, filename):
+        if not self.config:
+            self.config = FileConfig.detect_from_filename(filename)
+
         with open(filename) as file:
             return self._process_transactions(csv.DictReader(file))
 

@@ -8,7 +8,7 @@ from src.config import FileConfig
 def parse_args():
     parser = ArgumentParser(prog='Transation CSV Processor')
     parser.add_argument('-f', '--file', required=True)
-    parser.add_argument('-t', '--type', required=True,  choices=FileConfig.FILE_TYPES)
+    parser.add_argument('-t', '--type', required=False, choices=['DETECT'] + FileConfig.FILE_TYPES, default='DETECT')
     parser.add_argument('-o', '--out',  required=False, choices=ListOutputter.OUTPUT_OPTIONS, default='file')
 
     return parser.parse_args()
